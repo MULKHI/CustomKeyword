@@ -41,154 +41,49 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 public class Login {
 
 	@Keyword
-	def LoginApp(String action) {
-		KeywordUtil.logInfo("===Open Website apps===")
-		WebUI.openBrowser('')
-		WebUI.navigateToUrl(GlobalVariable.Url)
-		WebUI.delay(10)
+	def GetMassage () {
 
-		if	(WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_Push Notifications'), 10, FailureHandling.OPTIONAL)) {
+		KeywordUtil.logInfo("http://pretest-qa.dcidev.id/api/v1/message/88c086c9-80b5-46d5-92d9-cfe896f2f2b7")
 
-			KeywordUtil.logInfo("====Click button No Thanks (receive Push Notifications)====")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Sign me up'))
+		def builder = new RestRequestObjectBuilder()
+		def requestObject = builder
+				.withRestRequestMethod("GET")
+				.withRestUrl("http://pretest-qa.dcidev.id/api/v1/message/88c086c9-80b5-46d5-92d9-cfe896f2f2b7)
+				.withHttpHeaders([
+					new TestObjectProperty("Authorization", ConditionType.EQUALS, "bearer 82c50ed84ab303a5a5a3357b0ae6e1cf8cf936774c61c32bdb49c479ee3f2918"),
+				])
+				.build()
 
-			KeywordUtil.logInfo("====Click button OK (allow Cookie Policies)====")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Ok'))
+		'Send a request'
+		def responseJson = WS.sendRequest(requestObject, FailureHandling.STOP_ON_FAILURE)
+		def responseBody = responseJson.getResponseBodyContent()
+		def parseJson = new JsonSlurper().parseText(responseBody)
 
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
+		WS.comment("Get Response Body")
+		String pretty = println JsonOutput.prettyPrint(responseBody.toString())
+		String responseString = responseBody.toString()
+		responseCode = responseJson.getStatusCode()
+		println("Response Code = " + responseCode)
+
+		if (responseCode == '200') {
+
+			status = parseJson.status
+			response_name = parseJson.data.response.name
+
+			println("Status = " + status)
+			println("Response = " + response_name)
+
+		} else {
+
+			println("Response Code = " + responseCode)
+
+			status = parseJson.status
+			println("Status = " + status)
+
+			error_code = parseJson.error_code
+			println ("Error code : " + error_code)
+
+			error_message = parseJson.errors.message
+			println ("Message Error : " + error_message)
 		}
-
-		KeywordUtil.logInfo("=====Click button (Gabung | Daftar)======")
-		WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/a_Log in  Sign up'))
-
-		KeywordUtil.logInfo("=====Verify Element text (Selamat datang!)======")
-		WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/span_Selamat datang'),10)
-
-		if	(action == "InvalidEmail") {
-
-			KeywordUtil.logInfo("=====Input Invalid Email======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_email'), GlobalVariable.InvalidEmail)
-
-			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_password'), GlobalVariable.Password)
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Validasi Email atau katasandi salah======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Email atau kata sandi salah'),0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-
-		else if (action == "InvalidPassword") {
-
-			KeywordUtil.logInfo("=====Input Valid Email======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_email'), GlobalVariable.Email)
-
-			KeywordUtil.logInfo("=====Input Invalid Password======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_password'), GlobalVariable.InvalidPassword)
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Validasi Email atau katasandi salah======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Email atau kata sandi salah'),0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-
-		else if (action == "NoInputEmail") {
-
-			KeywordUtil.logInfo("=====No Input Email======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_email'), GlobalVariable.NoEmail)
-
-			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_password'), GlobalVariable.Password)
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Verify Element Text Warning Message (Silahkan masukan email yang valid)======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Silakan masukkan email yang valid'),0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-
-		else if (action == "NoInputPassword") {
-
-			KeywordUtil.logInfo("=====Input Valid Email======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_email'), GlobalVariable.Email)
-
-			KeywordUtil.logInfo("=====No Input Password======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_password'), GlobalVariable.NoPassword)
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Verify Element Text Warning Message (Masukan sandi)======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Masukkan sandi'),0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-
-		else if (action == "NoInput") {
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Verify Element Text Warning Message (Silahkan masukan email yang valid)======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Silakan masukkan email yang valid'),0)
-
-			KeywordUtil.logInfo("=====Verify Element Text Warning Message (Masukan sandi)======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_errorMsg_Masukkan sandi'),0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-
-		else if (action == "Valid") {
-
-			KeywordUtil.logInfo("=====Input Valid Email======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_email'), GlobalVariable.Email)
-
-			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Home_Page_RedDoorz(Login)/input_password'), GlobalVariable.Password)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Click Login button (Masuk)======")
-			WebUI.click(findTestObject('Home_Page_RedDoorz(Login)/button_Masuk'))
-
-			KeywordUtil.logInfo("=====Validasi Users Successfully login======")
-			WebUI.verifyElementPresent(findTestObject('Home_Page_RedDoorz(Login)/div_Nama pengguna'), 0)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			WebUI.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Close Browser======")
-			WebUI.closeBrowser()
-		}
-	}
 }
