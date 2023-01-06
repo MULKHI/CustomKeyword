@@ -1,6 +1,10 @@
 
 public class Login {
-
+	/**
+	 * UI Automation for the login feature uses Custom Keyword Katalon Studio
+	 * just add the Object Repository and add Global variable/Data Driven
+	 * Why use Custom Keyword? because its easier when debugging
+	 */
 	@Keyword
 	def LoginFeature(String action) {
 
@@ -11,10 +15,13 @@ public class Login {
 
 		if	(action == "Valid") {
 			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
+			
 			KeywordUtil.logInfo("=====Input Valid Email======")
 			//here I save the Test Data in Global Variable
 			//can also be taken from Data-driven which is save in folder Data File in excel form
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.Email )
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email_Address'), GlobalVariable.Email )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
 			//here I save the Test Data in Global Variable
@@ -29,19 +36,22 @@ public class Login {
 
 			KeywordUtil.logInfo("===Validation Successful Login===")
 			//here I make it as navigation to the Account Page
-			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
 
 		}
 
-		else if (action == "Valid_checking_remind_me") {
+		else if (action == "Valid_Checking_Remind_Me") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
 			KeywordUtil.logInfo("=====Input Valid Email Address======")
 			//here I save the Test Data in Global Variable
 			//can also be taken from Data-driven which is save in folder Data File in excel form
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.Email )
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email_Address'), GlobalVariable.Email )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
 			//here I save the Test Data in Global Variable
@@ -59,26 +69,26 @@ public class Login {
 
 			KeywordUtil.logInfo("===Validation Successful Login===")
 			//here I make it as navigation to the Account Page
-			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
 		}
 		
 		else if (action == "Invalid_Email_Address") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
 			KeywordUtil.logInfo("=====Input Invalid Email Address======")
 			//here I save the Test Data in Global Variable
 			//can also be taken from Data-driven which is save in folder Data File in excel form
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.InvalidEmail )
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email_Address'), GlobalVariable.InvalidEmail )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
 			//here I save the Test Data in Global Variable
 			//can also be taken from Data-driven which is save in folder Data File in excel form
 			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.Password )
-			
-			KeywordUtil.logInfo("=====Click Radio Button Remember Me======")
-			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_RememberMe'))
 
 			KeywordUtil.logInfo("=====Take Screen Shoot====")
 			WebUI.takeScreenshot()
@@ -88,183 +98,107 @@ public class Login {
 
 			KeywordUtil.logInfo("===Validation gets warning message 'Incorrect email or password'===")
 			//here I make it as if user gets warning message
-			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Login_Page/Msg_Incorrect email address or password'), 10)
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Incorrect email address or password'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
 		}
-	}
-}
+		
+		else if (action == "Invalid_Password") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
-
-
-===================================================================
-		if (Mobile.verifyElementExist(findTestObject('Object Repository/Login/Landing_Page/obj_LewatiTur'), 10, FailureHandling.OPTIONAL)) {
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Click LewatiTur======")
-			Mobile.tap(findTestObject('Object Repository/Login/Landing_Page/obj_LewatiTur'), 10)
-		}
-
-		KeywordUtil.logInfo("=====Verify Elemet Text Login======")
-		Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_Login'), 10)
-
-		if (Invalid == "InvalidEmail") {
-			KeywordUtil.logInfo("=====Input Ivalid Email======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputEmail'), email, 10)
-
-			KeywordUtil.logInfo("=====Input Valid Password======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputPassword'), password, 10)
-
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
-
-			KeywordUtil.logInfo("=====Validasi Akun Atau Kata Sandi Salah======")
-			Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_AkunAtauKataSandiSalah'), 10)
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
-		}
-
-		else if (Invalid == "InvalidPassword") {
-
-			KeywordUtil.logInfo("=====Input Valid Email======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputEmail'), email, 10)
+			KeywordUtil.logInfo("=====Input Valid Email Address======")
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email_Address'), GlobalVariable.Email )
 
 			KeywordUtil.logInfo("=====Input Invalid Password======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputPassword'), password, 10)
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.InvalidPassword )
 
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
+			KeywordUtil.logInfo("=====Take Screen Shoot====")
+			WebUI.takeScreenshot()
 
-			KeywordUtil.logInfo("=====Validasi Akun Atau Kata Sandi Salah======")
-			Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_AkunAtauKataSandiSalah'), 10)
+			KeywordUtil.logInfo("=====Click Button Submit======")
+			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
-		}
-
-		else if (Invalid == "NoInput") {
-
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
-
-			KeywordUtil.logInfo("=====Validasi Akun Atau Kata Sandi Salah======")
-			Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_AkunAtauKataSandiSalah'), 10)
+			KeywordUtil.logInfo("===Validation gets warning message 'Incorrect email or password'===")
+			//here I make it as if user gets warning message
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Incorrect email address or password'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
+			WebUI.takeScreenshot()
 		}
-
-		else if (Invalid == "NoInputEmail") {
-			KeywordUtil.logInfo("=====No Input Email======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputEmail'), email, 10)
+		
+		else if (action == "Without_Input_Email") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputPassword'), password, 10)
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.Password )
 
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
+			KeywordUtil.logInfo("=====Take Screen Shoot====")
+			WebUI.takeScreenshot()
 
-			KeywordUtil.logInfo("=====Validasi Akun Atau Kata Sandi Salah======")
-			Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_AkunAtauKataSandiSalah'), 10)
+			KeywordUtil.logInfo("=====Click Button Submit======")
+			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
+
+			KeywordUtil.logInfo("===Validation gets warning message 'Please enter email address'===")
+			//here I make it as if user gets warning message
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Please enter email address'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
+			WebUI.takeScreenshot()
 		}
+		
+		else if (action == "Without_Input_Password") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
-		else if (Invalid == "NoInputPassword") {
+			KeywordUtil.logInfo("=====Input Valid Email Address======")
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email_Address'), GlobalVariable.Email )
 
-			KeywordUtil.logInfo("=====Input Valid Email======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputEmail'), email, 10)
+			KeywordUtil.logInfo("=====Take Screen Shoot====")
+			WebUI.takeScreenshot()
 
-			KeywordUtil.logInfo("=====No Input Password Password======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputPassword'), password, 10)
+			KeywordUtil.logInfo("=====Click Button Submit======")
+			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
-
-			KeywordUtil.logInfo("=====Validasi Akun Atau Kata Sandi Salah======")
-			Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_AkunAtauKataSandiSalah'), 10)
+			KeywordUtil.logInfo("===Validation gets warning message 'Please enter password'===")
+			//here I make it as if user gets warning message
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Please enter password'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
+			WebUI.takeScreenshot()
 		}
+		
+		else if (action == "Without_Input_Email_And_Password") {
+			
+			KeywordUtil.logInfo("=====Verify Elemet Text Sign In======")
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/text_Sign In'), 10)
 
-		else if (Invalid == "Valid") {
+			KeywordUtil.logInfo("=====Take Screen Shoot====")
+			WebUI.takeScreenshot()
 
-			KeywordUtil.logInfo("=====Input Email======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputEmail'), email, 10)
+			KeywordUtil.logInfo("=====Click Button Submit======")
+			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
-
-			KeywordUtil.logInfo("=====Input Password======")
-			Mobile.setText(findTestObject('Object Repository/Login/Login_Page/field_InputPassword'), password, 10)
-
-
-			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
-
-			KeywordUtil.logInfo("=====Click Button Login======")
-			Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_Login'), 10)
-
-			if (Mobile.verifyElementExist(findTestObject('Object Repository/Login/Login_Page/text_SaveCredentials'), 10, FailureHandling.OPTIONAL)) {
-				Mobile.tap(findTestObject('Object Repository/Login/Login_Page/btn_MaybeLater'), 10)
-			}
-
-			if (Mobile.verifyElementExist(findTestObject('Home_Page/text_SelectYourAccount'), 10, FailureHandling.OPTIONAL)) {
-
-
-				KeywordUtil.logInfo("=====Take Screen Shoot======")
-				Mobile.takeScreenshot()
-
-				if (PilihAkun == "Live") {
-
-					KeywordUtil.logInfo("=====Click Akun Live======")
-					//					Mobile.tap(findTestObject('Object Repository/Home_Page/btn_AkunLive'), 10)
-					account_id = new com.database.client().getClientId(email)
-
-					live_id = new com.database.client().getAccountLive(account_id)
-
-					def account_live_id = new object.dynamic().appiumObjtext(live_id)
-					account_live_id.click()
-
-
-				}else {
-
-					KeywordUtil.logInfo("=====Click Button Demo======")
-					Mobile.tap(findTestObject('Home_Page/obj_Demo'), 10)
-				}
-
-				KeywordUtil.logInfo("=====Click Button Trading Sekarang======")
-				Mobile.tap(findTestObject('Home_Page/btn_TradingSekarang'), 10)
-			}
-
-			if (Mobile.verifyElementExist(findTestObject('Home_Page/text_SudahTahuCaraPakai'), 10, FailureHandling.OPTIONAL)) {
-
-
-				KeywordUtil.logInfo("=====Click Button Tidak Perlu. Saya sudah Paham======")
-				Mobile.tap(findTestObject('Home_Page/btn_TidakPerlu'), 10)
-
-				KeywordUtil.logInfo("=====Wait Elemet Button Mengerti======")
-				Mobile.verifyElementExist(findTestObject('Home_Page/text_KerenKamuSudahBisaTrading'), 10, FailureHandling.STOP_ON_FAILURE)
-
-				KeywordUtil.logInfo("=====Click Button Mengerti======")
-				Mobile.tap(findTestObject('Home_Page/btn_Mengerti'), 10)
-
-				KeywordUtil.logInfo("=====Verify elemet Text Informasi dana akun anda======")
-				Mobile.verifyElementExist(findTestObject('Home_Page/text_InformasiDanaAkunAnda'), 10, FailureHandling.STOP_ON_FAILURE)
-
-				KeywordUtil.logInfo("=====Click Button Lewati======")
-				Mobile.tap(findTestObject('Home_Page/btn_Lewati'), 10)
-			}
-
-			KeywordUtil.logInfo("=====Verify Elemet Text Balance======")
-			Mobile.verifyElementExist(findTestObject('Home_Page/text_Balance'), 10, FailureHandling.STOP_ON_FAILURE)
+			KeywordUtil.logInfo("===Validation gets 2 warning message===")
+			//here I make it as if user gets warning message
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Please enter email address'), 10)
+			WebUI.verifyElementPresent(findTestObject('Object Repository/Page/Login_Page/Msg_Please enter password'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
-			Mobile.takeScreenshot()
+			WebUI.takeScreenshot()
 		}
 	}
 }
