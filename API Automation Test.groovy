@@ -12,10 +12,14 @@ public class Login {
 		if	(action == "Valid") {
 			
 			KeywordUtil.logInfo("=====Input Valid Email======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.email )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.Email )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.password )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.Password )
 
 			KeywordUtil.logInfo("=====Take Screen Shoot====")
 			WebUI.takeScreenshot()
@@ -24,7 +28,8 @@ public class Login {
 			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
 			KeywordUtil.logInfo("===Validation Successful Login===")
-			WebUI.verifyElementExist(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
+			//here I make it as navigation to the Account Page
+			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
@@ -34,10 +39,14 @@ public class Login {
 		else if (action == "Valid_checking_remind_me") {
 
 			KeywordUtil.logInfo("=====Input Valid Email Address======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.email )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.Email )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.password )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.Password )
 			
 			KeywordUtil.logInfo("=====Click Radio Button Remember Me======")
 			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_RememberMe'))
@@ -49,7 +58,8 @@ public class Login {
 			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
 			KeywordUtil.logInfo("===Validation Successful Login===")
-			WebUI.verifyElementExist(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
+			//here I make it as navigation to the Account Page
+			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Account_Page/text_Selamat Datang'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
@@ -58,10 +68,14 @@ public class Login {
 		else if (action == "Invalid_Email_Address") {
 
 			KeywordUtil.logInfo("=====Input Invalid Email Address======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.email )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Email'), GlobalVariable.InvalidEmail )
 
 			KeywordUtil.logInfo("=====Input Valid Password======")
-			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.password )
+			//here I save the Test Data in Global Variable
+			//can also be taken from Data-driven which is save in folder Data File in excel form
+			WebUI.setText(findTestObject('Object Repository/Page/Login_Page/field_Password'), GlobalVariable.Password )
 			
 			KeywordUtil.logInfo("=====Click Radio Button Remember Me======")
 			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_RememberMe'))
@@ -73,7 +87,8 @@ public class Login {
 			WebUI.click(findTestObject('Object Repository/Page/Login_Page/btn_Submit'))
 
 			KeywordUtil.logInfo("===Validation gets warning message 'Incorrect email or password'===")
-			WebUI.verifyElementExist(findTestObject('Object Repository/Page/Account_Page/text_Incorrect email or password'), 10)
+			//here I make it as if user gets warning message
+			WebUI.verifyElementVisible(findTestObject('Object Repository/Page/Login_Page/Msg_Incorrect email address or password'), 10)
 
 			KeywordUtil.logInfo("=====Take Screen Shoot======")
 			WebUI.takeScreenshot()
